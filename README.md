@@ -272,7 +272,8 @@ The dashboard intentionally uses a lightweight frontend to keep the focus on the
         ├── ai/
         │   ├── explain.js
         │   └── test.js
-        ├── flinkConsumer.js
+        ├── consumer/
+        │   └── flinkConsumer.js
         ├── producer/
         │   └── publish.js
         └── server.js
@@ -349,6 +350,11 @@ The sequence is:
     HOTEL_SEARCH
 
 Flink processes the events and produces the corresponding recommendation.
+
+Demo UI:
+
+<img width="1291" height="838" alt="Screenshot 2026-09-24 at 2 56 45 AM" src="https://github.com/user-attachments/assets/76a93b5b-5b0b-422e-ad23-cef05d621878" />
+
 
 ---
 
