@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>JourneyIQ</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: #f5f7fa;
+      color: #172033;
+    }
+
+    .header {
+      height: 70px;
+      background: #111827;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .live {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #a7f3d0;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      background: #22c55e;
+      border-radius: 50%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .customer {
+      background: white;
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin-bottom: 20px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .customer-label {
+      color: #6b7280;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .customer-name {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 18px;
+    }
+
+    .journey {
+      font-size: 27px;
+      font-weight: 750;
+      margin-bottom: 20px;
+    }
+
+    .score {
+      font-size: 42px;
+      font-weight: 750;
+      margin-bottom: 10px;
+    }
+
+    .bar {
+      height: 10px;
+      background: #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      transition: width 700ms ease;
+      background: #111827;
+    }
+
+    .action {
+      font-size: 21px;
+      font-weight: 700;
+      padding: 18px;
+      background: #f3f4f6;
+      border-radius: 10px;
+    }
+
+    .signals {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .signal {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 9px;
+      background: #f9fafb;
+    }
+
+    .check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #22c55e;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .events {
+      margin-top: 20px;
+    }
+
+    .event {
+      display: flex;
+      justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+    .event-type {
+      font-weight: 600;
+    }
+
+    .event-time {
+      color: #9ca3af;
+    }
+
+    .ai {
+      line-height: 1.6;
+    }
+
+    .ai-summary {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .customer-message {
+      margin-top: 15px;
+      padding: 15px;
+      background: #f9fafb;
+      border-left: 4px solid #111827;
+      border-radius: 5px;
+    }
+
+    .button-container {
+      margin-top: 25px;
+    }
+
+    button {
+      border: none;
+      border-radius: 9px;
+      padding: 14px 22px;
+      background: #111827;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: .9;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="logo">JourneyIQ</div>
+
+  <div class="live">
+    <span class="dot"></span>
+    REAL-TIME
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="customer">
+    <div class="customer-label">CUSTOMER</div>
+    <div class="customer-name">Ahmed · C1001</div>
+
+    <div class="button-container">
+      <button id="simulate" onclick="simulateJourney()">
+        ▶ Simulate Customer Journey
+      </button>
+    </div>
+  </section>
+
+  <div class="grid">
+
+    <section class="card">
+      <div class="card-title">Detected Journey</div>
+
+      <div class="journey" id="journey">
+        GENERAL
+      </div>
+
+      <div class="card-title">Intent Score</div>
+
+      <div class="score" id="score">20%</div>
+
+      <div class="bar">
+        <div class="bar-fill" id="scoreBar"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-title">Next Best Action</div>
+
+      <div class="action" id="action">
+        NO ACTION
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-title">Journey Signals</div>
+
+      <div class="signals" id="signals">
+        <div style="color:#9ca3af">
+          Waiting for customer activity...
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-title">AI Explanation</div>
+
+      <div class="ai" id="ai">
+        <div style="color:#9ca3af">
+          AI explanation will appear when the journey is detected.
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="card events">
+    <div class="card-title">Live Event Stream</div>
+
+    <div id="events">
+      <div style="color:#9ca3af">
+        No events yet.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+
+let previousSignalCount = 0;
+
+async function getState() {
+  const response = await fetch("/api/state");
+  return response.json();
+}
+
+function render(state) {
+
+  document.getElementById("journey").textContent =
+    state.journey;
+
+  const percentage = Math.round(state.intentScore * 100);
+
+  document.getElementById("score").textContent =
+    `${percentage}%`;
+
+  document.getElementById("scoreBar").style.width =
+    `${percentage}%`;
+
+  document.getElementById("action").textContent =
+    state.nextAction.replaceAll("_", " ");
+
+  const signals = document.getElementById("signals");
+
+  const signalLabels = {
+    LOGIN: "Customer logged in",
+    PRODUCT_VIEW: "Viewed Travel Card",
+    FX_SEARCH: "Searched USD FX rate",
+    AIRLINE_PURCHASE: "Airline purchase detected",
+    HOTEL_SEARCH: "Hotel search detected"
+  };
+
+  if (state.signals.length === 0) {
+    signals.innerHTML =
+      '<div style="color:#9ca3af">Waiting for customer activity...</div>';
+  } else {
+    signals.innerHTML = state.signals
+      .map(signal => `
+        <div class="signal">
+          <span class="check">✓</span>
+          <span>${signalLabels[signal] || signal}</span>
+        </div>
+      `)
+      .join("");
+  }
+
+  const events = document.getElementById("events");
+
+  if (state.events.length === 0) {
+    events.innerHTML =
+      '<div style="color:#9ca3af">No events yet.</div>';
+  } else {
+    events.innerHTML = state.events
+      .map(event => `
+        <div class="event">
+          <span class="event-type">${event.type}</span>
+          <span>${event.label}</span>
+          <span class="event-time">${event.timestamp}</span>
+        </div>
+      `)
+      .join("");
+  }
+
+  if (state.aiExplanation) {
+
+    document.getElementById("ai").innerHTML = `
+      <div class="ai-summary">
+        ${state.aiExplanation.summary}
+      </div>
+
+      <div>
+        ${state.aiExplanation.reasoning}
+      </div>
+
+      <div class="customer-message">
+        <strong>Customer message</strong><br><br>
+        ${state.aiExplanation.customer_message}
+      </div>
+    `;
+  }
+
+  const button = document.getElementById("simulate");
+
+  button.disabled = state.running;
+
+  button.textContent = state.running
+    ? "⏳ Processing Journey..."
+    : "▶ Simulate Customer Journey";
+}
+
+async function simulateJourney() {
+
+  const button = document.getElementById("simulate");
+
+  button.disabled = true;
+
+  await fetch("/api/simulate", {
+    method: "POST"
+  });
+
+  poll();
+}
+
+async function poll() {
+
+  const state = await getState();
+
+  render(state);
+
+  if (state.running) {
+    setTimeout(poll, 500);
+  }
+}
+
+render({
+  journey: "GENERAL",
+  intentScore: 0.2,
+  nextAction: "NO_ACTION",
+  signals: [],
+  events: [],
+  aiExplanation: null,
+  running: false
+});
+
+</script>
+
+</body>
+</html>

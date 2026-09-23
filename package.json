@@ -1,0 +1,27 @@
+{
+  "name": "journeyiq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ferozyk/journeyiq.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ferozyk/journeyiq/issues"
+  },
+  "homepage": "https://github.com/ferozyk/journeyiq#readme",
+  "dependencies": {
+    "@kafkajs/confluent-schema-registry": "^4.1.0",
+    "dotenv": "^18.0.3",
+    "express": "^5.2.1",
+    "kafkajs": "^2.2.4"
+  }
+}
